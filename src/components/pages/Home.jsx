@@ -1,9 +1,11 @@
+import App from "../../App";
+
 
 
 const Home = () => {
     return (
         <div>
-            <h1 className="">home</h1>
+           <App></App>
         </div>
     );
 };
