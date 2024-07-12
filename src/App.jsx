@@ -1,5 +1,6 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useTypewriter, Cursor } from 'react-simple-typewriter';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -16,6 +17,28 @@ import swz from "../src/assets/switzerland.jpg";
 
 function App() {
 
+  const [spains] = useTypewriter({
+    typeSpeed:10,
+    words: ['Explore', 'the', 'World', 'With','Us'],
+    loop: 8,
+    onLoopDone: () => console.log(`loop completed after 3 runs.`)
+  })
+  const [banners1] = useTypewriter({
+    words: ['Customized', 'Travel', 'Plans'],
+    loop: 8,
+    onLoopDone: () => console.log(`loop completed after 3 runs.`)
+  })
+  const [italys] = useTypewriter({
+    words: ['Top-notch', 'Accommodations'],
+    loop: 8,
+    onLoopDone: () => console.log(`loop completed after 3 runs.`)
+  })
+  const [swzs] = useTypewriter({
+    words: ['Exceptional','Customer','Support'],
+    loop: 8,
+    onLoopDone: () => console.log(`loop completed after 3 runs.`)
+  })
+
 
   return (
     <>
@@ -24,7 +47,7 @@ function App() {
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
-          delay: 2500,
+          delay: 9000,
           disableOnInteraction: false,
         }}
 
@@ -40,17 +63,17 @@ function App() {
             }}>
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-neutral-content text-center">
-              <div className="max-w-md">
-                <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
+              <div className="max-w-md App">
+              <h1 className='mb-5 text-5xl font-bold'>{banners1}</h1>
                 <p className="mb-5">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                  quasi. In deleniti eaque aut repudiandae et a id nisi.
+                Tailor your journey to suit your preferences. From luxury escapes to budget adventures, our system provides personalized itineraries that cater to your unique needs and desires.
                 </p>
-                <button className="btn btn-primary">Get Started</button>
+               
               </div>
             </div>
           </div>
         </SwiperSlide>
+
         <SwiperSlide>
           <div
             className="hero min-h-[50rem]"
@@ -59,17 +82,15 @@ function App() {
             }}>
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-neutral-content text-center">
-              <div className="max-w-md">
-                <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-                <p className="mb-5">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                  quasi. In deleniti eaque aut repudiandae et a id nisi.
-                </p>
-                <button className="btn btn-primary">Get Started</button>
+              <div className='App max-w-md'>
+                <h1 className='mb-5 text-5xl font-bold'>{spains}</h1>
+                <p className='mb-5 mt-7'>Discover breathtaking destinations and unforgettable experiences. Our Tourism Management System offers seamless planning and booking to ensure your travels are hassle-free and memorable.</p>
+                <Cursor cursorColor='red' />
               </div>
             </div>
           </div>
         </SwiperSlide>
+
         <SwiperSlide >
           <div
             className="hero min-h-[50rem]"
@@ -78,17 +99,17 @@ function App() {
             }}>
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-neutral-content text-center">
-              <div className="max-w-md">
-                <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
+            <div className="max-w-md App">
+              <h1 className='mb-5 text-5xl font-bold'>{italys}</h1>
                 <p className="mb-5">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                  quasi. In deleniti eaque aut repudiandae et a id nisi.
+                Stay in the best hotels and resorts around the globe. With our Tourism Management System, you have access to a wide range of premium accommodations that guarantee comfort and quality service.
                 </p>
-                <button className="btn btn-primary">Get Started</button>
+               
               </div>
             </div>
           </div>
         </SwiperSlide>
+
         <SwiperSlide>
           <div
             className="hero min-h-[50rem]"
@@ -97,13 +118,12 @@ function App() {
             }}>
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-neutral-content text-center">
-              <div className="max-w-md">
-                <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
+            <div className="max-w-md App">
+              <h1 className='mb-5 text-5xl font-bold'>{swzs}</h1>
                 <p className="mb-5">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                  quasi. In deleniti eaque aut repudiandae et a id nisi.
+                Our dedicated support team is here to assist you at every step of your journey. From booking inquiries to travel advice, we ensure you receive the help you need for a smooth and enjoyable experience.
                 </p>
-                <button className="btn btn-primary">Get Started</button>
+               
               </div>
             </div>
           </div>
