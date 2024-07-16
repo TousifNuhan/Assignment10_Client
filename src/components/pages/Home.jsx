@@ -1,11 +1,13 @@
 import App from "../../App";
+import Location from "../Location/Location";
 
 
 
 const Home = () => {
     return (
         <div>
-           <App></App>
+            <App></App>
+            <Location></Location>
         </div>
     );
 };

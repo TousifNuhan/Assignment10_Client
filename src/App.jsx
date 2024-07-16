@@ -18,22 +18,25 @@ import swz from "../src/assets/switzerland.jpg";
 function App() {
 
   const [spains] = useTypewriter({
-    typeSpeed:10,
+    typeSpeed:50,
     words: ['Explore', 'the', 'World', 'With','Us'],
     loop: 8,
     onLoopDone: () => console.log(`loop completed after 3 runs.`)
   })
   const [banners1] = useTypewriter({
+    typeSpeed:50,
     words: ['Customized', 'Travel', 'Plans'],
     loop: 8,
     onLoopDone: () => console.log(`loop completed after 3 runs.`)
   })
   const [italys] = useTypewriter({
+    typeSpeed:50,
     words: ['Top-notch', 'Accommodations'],
     loop: 8,
     onLoopDone: () => console.log(`loop completed after 3 runs.`)
   })
   const [swzs] = useTypewriter({
+    typeSpeed:50,
     words: ['Exceptional','Customer','Support'],
     loop: 8,
     onLoopDone: () => console.log(`loop completed after 3 runs.`)
@@ -47,7 +50,7 @@ function App() {
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
-          delay: 9000,
+          delay: 7000,
           disableOnInteraction: false,
         }}
 
