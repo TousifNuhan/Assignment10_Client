@@ -5,9 +5,9 @@ import 'leaflet/dist/leaflet.css';
 
 const Location = () => {
     return (
-        <div className="w-11/12 mx-auto flex justify-center ">
+        <div className="w-11/12 mx-auto flex justify-center -z-10">
             {/* details */}
-            <div className=" flex-1 px-3 py-8 mt-20">
+            <div className=" flex-1 px-3 py-8 mt-20 bg-[#ffffff]">
                 <div >
                     <h1 className="text-center ml-20 text-5xl font-medium">Where we are</h1>
                     <div className=" flex justify-center ml-14 items-center mt-5 mb-8">
@@ -43,7 +43,7 @@ const Location = () => {
             </div>
 
             {/* Map */}
-            <div className="flex-1">
+            <div className="flex-1 -z-10">
                 <MapContainer center={[23.7506, 90.3682]} zoom={13} scrollWheelZoom={false} id='map' >
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

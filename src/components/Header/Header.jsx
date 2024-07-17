@@ -41,7 +41,7 @@ const Header = () => {
                     </div>
                     <div className="flex justify-center items-center">
                         <img className="h-20 " src="/src/assets/TravelGenie.png" alt="" />
-                        <a className=" text-2xl font-semibold">TravelGenie</a>
+                        <a className=" text-2xl font-bold">TravelGenie</a>
                     </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
