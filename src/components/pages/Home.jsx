@@ -2,9 +2,6 @@ import App from "../../App";
 import Location from "../Location/Location";
 import NewsAndUpdates from "../News$Updates/NewsAndUpdates";
 
-
-
-
 const Home = () => {
     return (
         <div>
