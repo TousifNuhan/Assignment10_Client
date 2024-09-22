@@ -10,19 +10,23 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.0",
     "google-map-react": "^2.2.1",
     "leaflet": "^1.9.4",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
     "react": "^18.3.1",
+    "react-awesome-reveal": "^4.2.14",
     "react-awesome-slider": "^4.1.0",
     "react-dom": "^18.3.1",
-    "react-hook-form": "^7.52.1",
+    "react-fast-marquee": "^1.6.5",
+    "react-hook-form": "^7.52.2",
     "react-icons": "^5.2.1",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.24.1",
     "react-simple-typewriter": "^5.0.1",
     "sort-by": "^1.2.0",
+    "survey-react-ui": "^1.11.11",
     "swiper": "^11.1.4"
   },
   "devDependencies": {

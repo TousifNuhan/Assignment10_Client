@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../Footer/Footer";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
 const Root = () => {
@@ -16,15 +16,16 @@ const Root = () => {
 
     </>
     const navLinks2 = <>
-        <button ><NavLink className={darkMode? 'btn btn-active mr-2' : 'btn mr-2'} to="/login">Login</NavLink></button>
-        <button ><NavLink className={darkMode? 'btn btn-active' : 'btn'} to="/register">Register</NavLink></button>
+        <button ><NavLink className={darkMode ? 'btn btn-active mr-2' : 'btn mr-2'} to="/login">Login</NavLink></button>
+        <button ><NavLink className={darkMode ? 'btn btn-active' : 'btn'} to="/register">Register</NavLink></button>
 
     </>
 
 
-    
+
     return (
         <div className={darkMode ? 'dark-mode' : 'light-mode'} >
+         
             {/* header */}
 
             <div className="navbar">
@@ -46,7 +47,7 @@ const Root = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[2] mt-3 w-52 p-2 shadow">
                             {
                                 navLinks
                             }
@@ -98,12 +99,12 @@ const Root = () => {
                         </div>
                     </div>
                     <div className="hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
-                        {
-                            navLinks2
-                        }
-                    </ul>
-                </div>
+                        <ul className="menu menu-horizontal px-1">
+                            {
+                                navLinks2
+                            }
+                        </ul>
+                    </div>
                 </div>
             </div>
 
