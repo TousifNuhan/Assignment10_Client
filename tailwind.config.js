@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily:{
-       Manrope:"'Manrope', sans-serif"
+        Nunito:"'Nunito', sans-serif",
+        Mansalva:"'Mansalva', system-ui"
       }
     },
   },

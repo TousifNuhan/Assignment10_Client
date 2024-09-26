@@ -56,7 +56,7 @@ function App() {
 
         navigation={true}
         modules={[Autoplay, Navigation]}
-        className="mySwiper"
+        className="mySwiper mb-16"
       >
         <SwiperSlide >
           <div

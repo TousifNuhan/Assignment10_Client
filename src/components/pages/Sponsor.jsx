@@ -4,7 +4,7 @@ const Sponsor = () => {
     return (
         <div className="mt-14">
             <div className="flex flex-col justify-center items-center">
-                <h1 className="text-5xl  font-semibold">Corporate Partners</h1>
+                <h1 className="text-5xl  font-bold">Corporate Partners</h1>
                 <hr className="border-2 border-[#4c4d4d] w-20 mb-5 mt-10"/>
             </div>
             <Marquee pauseOnHover={Boolean} className="mt-8">

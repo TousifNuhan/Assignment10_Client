@@ -1,22 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mansalva&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-#map{
+#map {
     height: 40rem;
     width: 40rem;
 }
 
-.dark-mode{
+.dark-mode {
     background-color: #1a1919;
     color: #999;
     height: 100%;
     transition: background-color 0.25s ease-in-out;
 }
 
-.light-mode{
+.light-mode {
     background-color: #fff;
     color: #333;
     height: 100%;
