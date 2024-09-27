@@ -52,6 +52,7 @@ function App() {
         autoplay={{
           delay: 7000,
           disableOnInteraction: false,
+          stopOnLastSlide:false,
         }}
 
         navigation={true}

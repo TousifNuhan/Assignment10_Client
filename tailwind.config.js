@@ -8,7 +8,8 @@ export default {
     extend: {
       fontFamily:{
         Nunito:"'Nunito', sans-serif",
-        Mansalva:"'Mansalva', system-ui"
+        Mansalva:"'Mansalva', system-ui",
+        Kristi:"'Kristi', cursive"
       }
     },
   },

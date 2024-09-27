@@ -37,12 +37,12 @@ const TouristSpot = () => {
                     }
                 }}
 
-                // autoplay={{
-                //     delay: 5000,
-                //     disableOnInteraction: false,
-                //     pauseOnMouseEnter:true,
-                //     stopOnLastSlide:false
-                //   }}
+                autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter:true,
+                    stopOnLastSlide:false
+                  }}
 
                 freeMode={true}
                 pagination={{
