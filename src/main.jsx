@@ -13,6 +13,9 @@ import Register from './components/Register/Register';
 import AddTouristSpot from './components/pages/AddTouristSpot';
 import AllTouristSpot from './components/pages/AllTouristSpot';
 import MyList from './components/pages/MyList';
+import Details from './components/pages/Details';
+
+
 
 
 const router = createBrowserRouter([
@@ -45,6 +48,10 @@ const router = createBrowserRouter([
         path:"/myList",
         element:<MyList></MyList>
       },
+      {
+        path:"/details",
+        element:<Details></Details>
+      }
       
     ],
   },

@@ -15,6 +15,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import { MdPeopleOutline } from "react-icons/md";
 import { FaCalendarAlt } from "react-icons/fa";
 import { WiDayCloudyWindy } from "react-icons/wi";
+import { Link } from 'react-router-dom';
 
 const TouristSpot = () => {
 
@@ -88,7 +89,7 @@ const TouristSpot = () => {
                                         <p className='text-xl font-bold'>500</p>
                                     </div>
                                     <div className=' flex justify-center items-center bg-[#f26d52] cursor-pointer hover:bg-[#ca5c46] px-3 py-3 rounded-md group-hover:ease-in-out '>
-                                        <button className='hover:text-white '>View Details</button>
+                                        <button  className='hover:text-white '><Link to="/details">View Details</Link></button>
                                         <FaLongArrowAltRight className='ml-2 ' />
                                     </div>
                                 </div>
