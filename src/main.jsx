@@ -14,9 +14,15 @@ import AddTouristSpot from './components/pages/AddTouristSpot';
 import AllTouristSpot from './components/pages/AllTouristSpot';
 import MyList from './components/pages/MyList';
 import Details from './components/pages/Details';
+import TouristSpot from './components/pages/TouristSpot';
 
-
-
+const spotLoader= async({params})=>{
+          const res=await fetch('http://localhost:5000/spot')
+          const data=await res.json()
+          const spot=data.find(e=>e._id === params.id)
+          
+          return spot
+}
 
 const router = createBrowserRouter([
   {
@@ -27,6 +33,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+        loader:()=>fetch('http://localhost:5000/spot')
       },
       {
         path:"/login",
@@ -41,6 +48,11 @@ const router = createBrowserRouter([
         element:<AddTouristSpot></AddTouristSpot>
       },
       {
+        path:"/touristSpot",
+        element:<TouristSpot></TouristSpot>,
+        loader:()=>fetch('http://localhost:5000/spot')
+      },
+      {
         path:"/allTouristSpot",
         element:<AllTouristSpot></AllTouristSpot>
       },
@@ -49,8 +61,9 @@ const router = createBrowserRouter([
         element:<MyList></MyList>
       },
       {
-        path:"/details",
-        element:<Details></Details>
+        path:"/details/:id",
+        element:<Details></Details>,
+        loader: spotLoader
       }
       
     ],

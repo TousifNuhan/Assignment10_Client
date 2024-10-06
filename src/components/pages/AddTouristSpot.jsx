@@ -1,5 +1,45 @@
+import Swal from 'sweetalert2'
 
 const AddTouristSpot = () => {
+
+    const handleAddSpot = e => {
+
+        e.preventDefault();
+        const form = e.target;
+        const userName = form.userName.value;
+        const email = form.email.value;
+        const countryName = form.countryName.value;
+        const spotName = form.spotName.value;
+        const location = form.location.value;
+        const photoURL = form.photoURL.value;
+        const averageCost = form.averageCost.value;
+        const seasonality = form.seasonality.value;
+        const travelTime = form.travelTime.value;
+        const totalVisitors = form.totalVisitors.value;
+        const description = form.description.value;
+
+        const newSpot = { userName, email, countryName, spotName, location, photoURL, averageCost, seasonality, travelTime, totalVisitors, description }
+        
+        fetch('http://localhost:5000/spot',{
+            method:'POST',
+             headers:{
+                'content-type':'application/json'
+             },
+             body:JSON.stringify(newSpot)
+        })
+        .then(req=>req.json())
+        .then(data=>{
+            console.log(data)
+            if(data.insertedId){
+                Swal.fire({
+                    title: 'Congratulations',
+                    text: 'You have successfully added a spot',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                  })
+            }
+        })
+    }
 
     return (
         <div>
@@ -7,11 +47,11 @@ const AddTouristSpot = () => {
                 <h1 className="text-[#1a1d27] font-bold text-2xl">Add Your Dream Destination</h1>
                 <p className="text-center text-[#03071299] font-semibold text-sm w-3/5 mt-1 mb-4">Welcome to the Tourist Spot Submission page! This form allows users to contribute by adding new tourist spots to our directory.</p>
             </div>
-            <form>
+            <form onSubmit={handleAddSpot}>
                 <div className=" border-2 border-[#1dd100] rounded-2xl w-4/5 mx-auto p-10">
                     {/* {User's Info} */}
                     <div>
-                        <h1 className="   text-[#030712] font-bold text-xl mb-4">User Information</h1>
+                        <h1 className=" text-[#030712] font-bold text-xl mb-4">User Information</h1>
                     </div>
                     <div className="flex items-center ">
                         <div className="flex-1">
@@ -107,7 +147,7 @@ const AddTouristSpot = () => {
                             <input
                                 type="text"
                                 placeholder="Enter Seasonality"
-                                name="countryName"
+                                name="seasonality"
                                 className="border py-3 px-3 rounded-md focus:outline-none focus:border-[#ff1ecc] w-full max-w-xl" />
                         </div>
                     </div>
@@ -118,7 +158,7 @@ const AddTouristSpot = () => {
                                 <span className="label-text text-[#2c3345] text-base font-semibold">Travel Time</span>
                             </label>
                             <input
-                                type="text"
+                                type="number"
                                 placeholder="Enter Travel Time"
                                 name="travelTime"
                                 className="border py-3 px-3 rounded-md focus:outline-none focus:border-[#ff1ecc] w-full max-w-xl" />
@@ -128,7 +168,7 @@ const AddTouristSpot = () => {
                                 <span className="label-text text-[#2c3345] text-base font-semibold">Total Visitors Per Year</span>
                             </label>
                             <input
-                                type="text"
+                                type="number"
                                 placeholder="Enter Total Visitors Per Year"
                                 name="totalVisitors"
                                 className="border py-3 px-3 rounded-md focus:outline-none focus:border-[#ff1ecc] w-full max-w-xl" />
