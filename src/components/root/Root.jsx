@@ -1,12 +1,29 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import 'react-tooltip/dist/react-tooltip.css'
+import { Tooltip } from 'react-tooltip'
+import logo from '../../assets/boy.png'
+
 
 const Root = () => {
 
-
     const [darkMode, setDarkMode] = useState(false)
+    const { user, logout } = useContext(AuthContext)
+    // const loader =useLoaderData()
+    console.log(user)
+
+    const handleSignOut = () => {
+        logout()
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
 
     const navLinks = <>
         <li><NavLink className={`${darkMode ? 'btn btn-active' : 'btn'} text-base font-bold`} to="/">Home</NavLink></li>
@@ -16,8 +33,16 @@ const Root = () => {
 
     </>
     const navLinks2 = <>
-        <button ><NavLink className={`${darkMode ? 'btn btn-active mr-2' : 'btn mr-2'} text-lg font-bold`} to="/login">Login</NavLink></button>
-        <button ><NavLink className={`${darkMode ? 'btn btn-active' : 'btn'} text-base font-bold`} to="/register">Register</NavLink></button>
+
+        {
+            user ?
+                <button ><NavLink className={`${darkMode ? 'btn btn-active mr-2' : 'btn mr-2'} text-lg font-bold`} onClick={handleSignOut} to="/login">SignOut</NavLink></button>
+                :
+                <>
+                    <button ><NavLink className={`${darkMode ? 'btn btn-active mr-2' : 'btn mr-2'} text-lg font-bold`} to="/login">Login</NavLink></button>
+                    <button ><NavLink className={`${darkMode ? 'btn btn-active' : 'btn'} text-base font-bold`} to="/register">Register</NavLink></button>
+                </>
+        }
 
     </>
 
@@ -94,9 +119,28 @@ const Root = () => {
                         </label>
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar mr-3">
                             <div className="w-10 rounded-full">
-                                <img className="mr-3"
-                                    alt="Tailwind CSS Navbar component"
-                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                {
+                                    user ? <div>
+                                        <a id="my-anchor-element">
+                                            <img src={user.photoURL} alt="Coming soon" />
+                                        </a>
+                                        <Tooltip className="z-20"
+                                            anchorSelect="#my-anchor-element"
+                                            content={user.displayName}
+                                        />
+                                    </div> :
+                                        <div>
+                                            <a id="my-anchor-element">
+                                                <img src={logo} alt="Coming soon" />
+                                            </a>
+                                            <Tooltip className="z-20"
+                                                anchorSelect="#my-anchor-element"
+                                                content="Coming Soon"
+                                            />
+                                        </div>
+                                }
+
+
                             </div>
                         </div>
                         <div className="hidden lg:flex">

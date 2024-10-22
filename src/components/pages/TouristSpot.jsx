@@ -58,7 +58,7 @@ const TouristSpot = () => {
             >
 
                 {spots.map((spot) => (
-                    <SwiperSlide key={spot.title} >
+                    <SwiperSlide key={spot._id} >
 
                         <div className=' flex flex-col gap-6 group relative shadow-lg text-white rounded-xl  lg:h-full lg:w-full '>
                             <div className='absolute inset-0 bg-cover bg-center'

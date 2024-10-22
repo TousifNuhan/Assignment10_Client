@@ -1,8 +1,78 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Login = () => {
+
+    const location=useLocation()
+    console.log(location)
+    const navigate=useNavigate()
+  
+    const {signIn,googleSignIn,githubSignIn}=useContext(AuthContext)
+
+    const handleLogin=e=>{
+        e.preventDefault()
+        const form=e.target 
+        const email=form.email.value 
+        const password=form.password.value
+        
+        signIn(email,password)
+        .then(result=>{
+            console.log(result.user)
+            e.target.reset()
+           navigate(location?.state ? location.state : '/')
+        })
+        .catch(error=>{
+            console.error(error)
+        })
+    }
+
+    const handleGoogleSignIn=()=>{
+        googleSignIn()
+       .then(result=>{
+        console.log(result.user)
+        const email=result.user.email 
+        const user={email}
+
+        fetch('http://localhost:5000/user',
+            {
+                method:'POST',
+               headers:{
+                 'content-type':'application/json'
+               },
+               body:JSON.stringify(user)
+            }
+        )
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+        })
+       })
+       .catch(error=>{
+        console.error(error)
+       })
+    }
+
+    const handleGithubSignIn=()=>{
+        githubSignIn()
+        .then(result=>{
+            console.log(result.user)
+            // const email=result.user.email 
+            // const user={email}
+            // fetch('http://localhost:5000/user',{
+            //     method:'POST',
+            //     headers:{
+            //         'content-type':'application/json'
+            //     },
+            //     body:JSON.stringify(user)
+            // })
+        })
+        .catch(error=>{
+            console.error(error)
+        })
+    }
 
     return (
         <div>
@@ -10,7 +80,7 @@ const Login = () => {
                 <div className="flex justify-center flex-1">
                     <div className="w-3/5 ">
                         <h1 className="text-4xl text-black">Sign In</h1>
-                        <form className=" mt-8">
+                        <form  onSubmit={handleLogin} className=" mt-8">
                             <div className="">
                                 <label className="label">
                                     <span className="label-text text-base">Email Address</span>
@@ -41,11 +111,11 @@ const Login = () => {
                             </div>
 
                             <div className="flex items-center justify-evenly">
-                                <button className="flex btn w-2/5">
+                                <button onClick={handleGoogleSignIn} className="flex btn w-2/5">
                                     <FaGoogle />
                                     <p>Google</p>
                                 </button>
-                                <button className="flex btn w-2/5">
+                                <button onClick={handleGithubSignIn} className="flex btn w-2/5">
                                     <FaGithub />
                                     <p>Github</p>
                                 </button>

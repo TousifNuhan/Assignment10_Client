@@ -15,65 +15,76 @@ import AllTouristSpot from './components/pages/AllTouristSpot';
 import MyList from './components/pages/MyList';
 import Details from './components/pages/Details';
 import TouristSpot from './components/pages/TouristSpot';
+import AuthProvider from './components/AuthProvider/AuthProvider';
+import PrivateRoute from './components/Route/PrivateRoute';
 
-const spotLoader= async({params})=>{
-          const res=await fetch('http://localhost:5000/spot')
-          const data=await res.json()
-          const spot=data.find(e=>e._id === params.id)
-          
-          return spot
+const spotLoader = async ({ params }) => {
+  const res = await fetch('http://localhost:5000/spot')
+  const data = await res.json()
+  const spot = data.find(e => e._id === params.id)
+
+  return spot
 }
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    loader:()=>fetch('http://localhost:5000/user'),
     errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
         element: <Home />,
-        loader:()=>fetch('http://localhost:5000/spot')
+        loader: () => fetch('http://localhost:5000/spot')
       },
       {
-        path:"/login",
-        element:<Login></Login>
+        path: "/login",
+        element: <Login></Login>
       },
       {
-        path:"/register",
-        element:<Register></Register>
+        path: "/register",
+        element: <Register></Register>
       },
       {
-        path:"/addTouristSpot",
-        element:<AddTouristSpot></AddTouristSpot>
+        path: "/addTouristSpot",
+        element: <PrivateRoute><AddTouristSpot></AddTouristSpot></PrivateRoute>
       },
       {
-        path:"/touristSpot",
-        element:<TouristSpot></TouristSpot>,
-        loader:()=>fetch('http://localhost:5000/spot')
+        path: "/touristSpot",
+        element: <TouristSpot></TouristSpot>,
+        loader: () => fetch('http://localhost:5000/spot')
       },
       {
-        path:"/allTouristSpot",
-        element:<AllTouristSpot></AllTouristSpot>
+        path: "/allTouristSpot",
+        element: <AllTouristSpot></AllTouristSpot>,
+        loader: () => fetch('http://localhost:5000/spot')
       },
       {
-        path:"/myList",
-        element:<MyList></MyList>
+        path: "/myList",
+        element: <PrivateRoute><MyList></MyList></PrivateRoute>,
+        loader:()=>fetch('http://localhost:5000/user'),
+        
       },
       {
-        path:"/details/:id",
-        element:<Details></Details>,
+        path:"/myList/:id",
+        element:<PrivateRoute><MyList></MyList></PrivateRoute>,
+        loader:({params})=>fetch(`http://localhost:5000/user/${params.id}`)
+      },
+      {
+        path: "/details/:id",
+        element: <PrivateRoute><Details></Details></PrivateRoute>,
         loader: spotLoader
       }
-      
+
     ],
   },
 ]);
 
-
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )

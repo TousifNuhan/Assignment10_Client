@@ -1,15 +1,111 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
+
+    const navigate=useNavigate()
+    const { createUser, googleSignIn, githubSignIn, } = useContext(AuthContext)
+
+    const handleSignUp = e => {
+
+        e.preventDefault()
+        const form = e.target
+        const name = form.name.value
+        const email = form.email.value
+        const password = form.password.value
+        const PhotoURL = form.PhotoURL.value
+        console.log(email, password, PhotoURL)
+
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user)
+                e.target.reset()
+
+                updateProfile(result.user,{
+                    displayName:name,
+                    photoURL:PhotoURL
+                })
+                .then(()=>{
+                    console.log('profile updated')
+                })
+                .catch(error=>{
+                    console.error(error)
+                })
+
+                const user = { name, email, PhotoURL }
+                fetch('http://localhost:5000/user', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                    })
+                    navigate( '/')
+            })
+            .catch(error => {
+                console.error(error)
+            })
+
+    }
+
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then(result => {
+                console.log(result.user)
+                const email=result.user.email
+                const user={email}
+                fetch('http://localhost:5000/user',{
+                    method:'POST',
+                    headers:{
+                        'content-type':'application/json'
+                    },
+                    body:JSON.stringify(user)
+                })
+                .then(res=>res.json())
+                .then(data=>{
+                    console.log(data)
+                })
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
+
+    const handleGithubSignIn=()=>{
+        githubSignIn()
+        .then(result=>{
+            console.log(result.user)
+            // const email=result.user.email 
+            // const user={email}
+            // fetch('http://localhost:5000/user',{
+            //     method:'POST',
+            //     headers:{
+            //         'content-type':'application/json'
+            //     },
+            //     body:JSON.stringify(user)
+            // })
+        })
+        .catch(error=>{
+            console.error(error)
+        })
+    }
+
     return (
         <div>
             <div className="flex justify-center items-center mt-10 mb-16">
                 <div className="flex justify-center flex-1">
                     <div className="w-3/5 ">
                         <h1 className="text-4xl text-black">Sign Up</h1>
-                        <form className=" mt-8">
+                        <form onSubmit={handleSignUp} className=" mt-8">
                             <div className="">
                                 <label className="label">
                                     <span className="label-text text-base">Full Name</span>
@@ -60,11 +156,11 @@ const Register = () => {
                             </div>
 
                             <div className="flex items-center justify-evenly">
-                                <button className="flex btn w-2/5">
+                                <button onClick={handleGoogleSignIn} className="flex btn w-2/5">
                                     <FaGoogle />
                                     <p>Google</p>
                                 </button>
-                                <button className="flex btn w-2/5">
+                                <button onClick={handleGithubSignIn} className="flex btn w-2/5">
                                     <FaGithub />
                                     <p>Github</p>
                                 </button>

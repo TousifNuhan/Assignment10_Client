@@ -158,7 +158,7 @@ const AddTouristSpot = () => {
                                 <span className="label-text text-[#2c3345] text-base font-semibold">Travel Time</span>
                             </label>
                             <input
-                                type="number"
+                                type="time"
                                 placeholder="Enter Travel Time"
                                 name="travelTime"
                                 className="border py-3 px-3 rounded-md focus:outline-none focus:border-[#ff1ecc] w-full max-w-xl" />
