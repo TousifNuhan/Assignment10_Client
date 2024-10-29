@@ -1,8 +1,16 @@
-# React + Vite
+# Website Name: TravelGenie
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Live site Url: https://assignment-10-f230e.web.app/
 
-Currently, two official plugins are available:
+# Five bullet points features and characteristics are:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1.Authentication
+2.Dynamic Datas
+3.Private/Protected Route
+4.Responsive Design
+5.Used MongoDB 
+
+# Npm package:
+1.React Awesome reveal
+2.React-tooltip
+
