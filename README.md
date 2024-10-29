@@ -14,3 +14,8 @@
 1.React Awesome reveal
 2.React-tooltip
 
+# selected category's name:
+
+ -> Europe
+
+
