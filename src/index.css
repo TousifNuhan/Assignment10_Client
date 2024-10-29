@@ -6,10 +6,32 @@
 @tailwind components;
 @tailwind utilities;
 
-#map {
-    height: 40rem;
-    width: 40rem;
+@media (min-width: 640px) {
+    #map {
+        height: 20rem; 
+        width: 80%;  
+        margin: auto;
+    }
 }
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    #map {
+        height: 40rem; 
+        width: 80%;  
+        margin: auto;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    #map {
+        height: 40rem; 
+        
+    }
+}
+
+
 
 .dark-mode {
     background-color: #1a1919;

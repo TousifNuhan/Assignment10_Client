@@ -9,12 +9,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAoewcIodyRLGtj_-fCC1yLDGE2C8Orpqg",
-  authDomain: "assignment-10-f230e.firebaseapp.com",
-  projectId: "assignment-10-f230e",
-  storageBucket: "assignment-10-f230e.appspot.com",
-  messagingSenderId: "325747507806",
-  appId: "1:325747507806:web:a4c6d3d4f1c397f9346acf"
+  apiKey:import.meta.env.VITE_APIKEY,
+  authDomain:import.meta.env.VITE_AUTHDOMAIN,
+  projectId:import.meta.env.VITE_PROJECTID,
+  storageBucket:import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId:import.meta.env.VITE_MESSAGINGSENDERID,
+  appId:import.meta.env.VITE_APPID,
 };
 
 // Initialize Firebase

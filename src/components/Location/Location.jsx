@@ -5,46 +5,47 @@ import 'leaflet/dist/leaflet.css';
 
 const Location = () => {
     return (
-        <div className="w-11/12 mx-auto flex justify-center -z-10">
+        <div className="md:w-11/12 mx-auto md:flex justify-center -z-10">
             {/* details */}
-            <div className=" flex-1 px-3 py-8 mt-20 ">
-                <div >
-                    <h1 className="text-center ml-20 text-5xl font-medium">Where we are</h1>
-                    <div className=" flex justify-center ml-14 items-center mt-5 mb-8">
-                        <img className="h-8 w-8 mr-4" src="https://tejal.wpengine.com/wp-content/uploads/2019/01/title-icon-img.png" alt="" />
-                        <hr className="w-[14rem] border-[#b8a680]" />
+            <div className="w-4/5 md:w-11/12 flex-1 px-3 py-8 mt-20 mx-auto">
+                <div className="">
+                    <h1 className="text-start  lg:text-center lg:ml-20 text-4xl md:text-5xl lg:text-6xl font-semibold md:font-medium ">Where we are</h1>
+                    <div className=" flex justify-start lg:justify-center items-center mt-5 mb-8 lg:mr-3">
+                        <img className="md:h-8 h-5 w-5 md:w-8 md:mr-5 mr-2 " src="https://tejal.wpengine.com/wp-content/uploads/2019/01/title-icon-img.png" alt="" />
+                        <hr className="w-[5rem] md:w-[14rem] border-[#b8a680] " />
                     </div>
-                    <h3 className="text-center text-2xl ml-3 pb-8">Location in the state</h3>
+                    <h3 className="text-start lg:text-center text-2xl md:mr-16 pb-8 ">Location in the state</h3>
                 </div>
-                <div className="flex justify-evenly items-center ml-40">
-                    <div className="text-[#777777] text-base">
+                <div className="md:flex justify-evenly lg:w-4/5 md:mx-auto lg:ml-32 ">
+                    <div className="text-[#777777] text-base ">
                         <p >Road-13, Sector-7, Uttara</p>
                         <p className="my-1">Dhaka North, 1230</p>
                         <p>Bangladesh</p>
+                        <div className="md:mt-8 md:my-0 my-6">
+                            <button className="btn">Get Direction</button>
+                        </div>
                     </div>
-                    <div className="text-base ">
+                    <div className="text-base md:ml-2 lg:ml-0">
                         <div className="flex items-center ">
-                            <MdEmail className="h-5 w-5"/>
-                            <p className="ml-2 text-[#777777]">admin@gmail.com</p>
+                            <MdEmail className="h-4 w-5" />
+                            <p className="ml-2 text-[#b8a680]">admin@gmail.com</p>
                         </div>
                         <div className="flex items-center my-1">
-                            <FaPhoneAlt className="h-5 w-5"/>
+                            <FaPhoneAlt className="h-4 w-5" />
                             <p className="ml-2 text-[#777777]">01306001646</p>
                         </div>
                         <div className="flex  items-center">
-                            <img className="h-5 w-5 " src="/src/assets/telephone.png" alt="" />
+                            <img className="h-4 w-5 " src="/src/assets/telephone.png" alt="" />
                             <p className="ml-2 text-[#777777] ">48548954-454</p>
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-start ">
-                    <button className="btn ml-44 mt-5">Get Direction</button>
-                </div>
+              
             </div>
 
             {/* Map */}
-            <div className="flex-1 -z-10">
-                <MapContainer center={[23.7506, 90.3682]} zoom={13} scrollWheelZoom={false} id='map' >
+            <div className="flex-1 mt-20 md:relative z-10">
+                <MapContainer center={[23.7506, 90.3682]} zoom={13} scrollWheelZoom={false} id='map'  >
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

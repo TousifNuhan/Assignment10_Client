@@ -3,7 +3,7 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { WiDayCloudyWindy } from "react-icons/wi";
 import { FaDollarSign } from "react-icons/fa";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const AllTouristSpotCard = ({spot}) => {
 
@@ -12,10 +12,10 @@ const AllTouristSpotCard = ({spot}) => {
     console.log(spot)
     return (
         <div>
-            <div className=" hover:border border-[#f26d52] rounded-xl p-2 ">
+            <div className=" hover:border hover:border-[#f26d52] rounded-xl p-2 ">
                 <div className="group">
                     <div className="overflow-hidden rounded-lg ">
-                        <img className="rounded-lg group-hover:transition group-hover:scale-110 group-hover:" src={photoURL} alt="" />
+                        <img className="rounded-lg group-hover:transition group-hover:scale-110" src={photoURL} alt="" />
                     </div>
                     <div className="flex justify-between mx-auto items-center w-11/12 mt-4 mb-2">
 

@@ -1,5 +1,6 @@
 import Swal from 'sweetalert2'
 
+
 const AddTouristSpot = () => {
 
     const handleAddSpot = e => {
@@ -38,22 +39,29 @@ const AddTouristSpot = () => {
                     confirmButtonText: 'Ok'
                   })
             }
+            else{
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Error!!!Spot hasn't been added yet",                   
+                  });
+            }
         })
     }
 
     return (
-        <div>
-            <div className="w-4/5 flex flex-col items-center mx-auto my-3">
-                <h1 className="text-[#1a1d27] font-bold text-2xl">Add Your Dream Destination</h1>
-                <p className="text-center text-[#03071299] font-semibold text-sm w-3/5 mt-1 mb-4">Welcome to the Tourist Spot Submission page! This form allows users to contribute by adding new tourist spots to our directory.</p>
+        <div className='mt-6 md:mt-0'>
+            <div className="w-11/12 flex flex-col items-center mx-auto my-3">
+                <h1 className="text-[#1a1d27] font-bold text-xl md:text-2xl">Add Your Dream Destination</h1>
+                <p className="text-center text-[#03071299] font-semibold text-sm w-4/5 md:w-3/5 mt-4 md:mt-1 mb-4">Welcome to the Tourist Spot Submission page! This form allows users to contribute by adding new tourist spots to our directory.</p>
             </div>
-            <form onSubmit={handleAddSpot}>
-                <div className=" border-2 border-[#1dd100] rounded-2xl w-4/5 mx-auto p-10">
+            <form onSubmit={handleAddSpot} className='md:mt-0 mt-6'>
+                <div className=" border-2 border-[#1dd100] rounded-2xl w-4/5 mx-auto  p-6 md:p-10">
                     {/* {User's Info} */}
                     <div>
-                        <h1 className=" text-[#030712] font-bold text-xl mb-4">User Information</h1>
+                        <h1 className=" text-[#030712] font-bold text-xl md:mt-0 mt-3 mb-4">User Information</h1>
                     </div>
-                    <div className="flex items-center ">
+                    <div className="md:flex items-center ">
                         <div className="flex-1">
                             <label className="label">
                                 <span className="label-text text-[#2c3345] text-base font-semibold">User Name</span>
@@ -64,7 +72,7 @@ const AddTouristSpot = () => {
                                 name="userName"
                                 className="border py-3 px-3 rounded-md focus:outline-none focus:border-[#ff1ecc] w-full max-w-xl" />
                         </div>
-                        <div className="ml-10 flex-1 ">
+                        <div className="md:ml-10 flex-1 ">
                             <label className="label">
                                 <span className="label-text text-[#2c3345] text-base font-semibold"> User Email</span>
                             </label>
@@ -83,7 +91,7 @@ const AddTouristSpot = () => {
 
                     {/* {Tourist Spot info} */}
 
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                         <div >
                             <label className="label">
                                 <span className="label-text text-[#2c3345] text-base font-semibold">Country Name</span>
@@ -129,7 +137,7 @@ const AddTouristSpot = () => {
                             className="border py-3 px-3 rounded-md focus:outline-none focus:border-[#ff1ecc] w-full " />
                     </div>
 
-                    <div className="flex items-center">
+                    <div className="md:flex items-center">
                         <div className="flex-1 mr-10">
                             <label className="label">
                                 <span className="label-text text-[#2c3345] text-base font-semibold">Average Cost</span>
@@ -152,7 +160,7 @@ const AddTouristSpot = () => {
                         </div>
                     </div>
 
-                    <div className="flex items-center my-4">
+                    <div className="md:flex items-center my-4">
                         <div className="flex-1 mr-10">
                             <label className="label">
                                 <span className="label-text text-[#2c3345] text-base font-semibold">Travel Time</span>
@@ -188,7 +196,7 @@ const AddTouristSpot = () => {
 
                 </div>
                 <div className="flex justify-center py-5 ">
-                    <button className="text-white w-1/5 py-3 rounded-[4px]  bg-[#18bd5b] hover:bg-[#269746]">Add</button>
+                    <button className="text-white w-2/5 md:w-1/5 py-3 rounded-[4px]  bg-[#18bd5b] hover:bg-[#269746]">Add</button>
                 </div>
             </form>
 

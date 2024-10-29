@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import Swal from 'sweetalert2'
+
 
 const MyList = () => {
 
     const loadedUsers = useLoaderData()
     const [users, setUsers] = useState(loadedUsers)
+    console.log(loadedUsers)
 
+    const { user } = useContext(AuthContext)
+
+    const userEmail = user?.email
+
+    const usersMap = users.filter(user => user.email === userEmail)
+    // setUsers(usersMap)
     const [selectedSpot, setSelectedSpot] = useState(null)
 
     const openModal = (spot) => {
@@ -21,20 +31,41 @@ const MyList = () => {
     let serialNumber = 1;
 
     const handleDelete = id => {
-        fetch(`http://localhost:5000/user/${id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                const getTouristSpots = users.map((user) => ({
-                    ...user,
-                    touristSpots: user.touristSpots.filter(e => e._id !== id),
 
-                }))
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
 
-                setUsers(getTouristSpots)
-            })
+                fetch(`http://localhost:5000/user/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        const getTouristSpots = users.map((user) => ({
+                            ...user,
+                            touristSpots: user.touristSpots.filter(e => e._id !== id),
+
+                        }))
+
+                        setUsers(getTouristSpots)
+                    })
+
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "The spot has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+
     }
 
     const handleUpdate = e => {
@@ -71,19 +102,24 @@ const MyList = () => {
 
                 const updateUsers = users.map(user => ({
                     ...user,
-                    touristSpots: user.touristSpots.map(spot => 
+                    touristSpots: user.touristSpots.map(spot =>
                         spot._id === selectedSpot._id ? { ...spot, ...updatedSpot } : spot
                     )
                 }))
                 setUsers(updateUsers)
+                Swal.fire({
+                    text: 'You have successfully updated the spot',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
             })
 
     }
 
     return (
         <div className="text-center">
-            <h1 className="text-3xl font-semibold mt-3">My Tourist Spots</h1>
-            <p className="w-2/4 mx-auto text-base font-medium mt-1 mb-10">On this page, you can view all the tourist spots you have added. You can update or delete any entry, but only spots that you've personally added are visible.
+            <h1 className="text-3xl font-semibold mt-6 md:mt-3">My Tourist Spots</h1>
+            <p className="w-11/12 md:w-2/4 mx-auto text-base font-medium mt-5 md:mt-1 mb-10">On this page, you can view all the tourist spots you have added. You can update or delete any entry, but only spots that you've personally added are visible.
             </p>
 
             <div className="overflow-x-auto w-11/12 mx-auto mb-10">
@@ -99,7 +135,7 @@ const MyList = () => {
                             <th>Delete</th>
                         </tr>
                     </thead>
-                    {users.map(user =>
+                    {usersMap.map(user =>
                         <tbody key={user._id}>
                             {user.touristSpots.map(e =>
                                 <tr key={e._id}>
@@ -260,7 +296,7 @@ const MyList = () => {
                                                                     className="border textar py-3 px-3 rounded-md focus:outline-none focus:border-[#ff1ecc] w-full max-w-xl" />
                                                             </div>
 
-                                                            <button type="submit" className="px-6 py-3 mr-1 text-white bg-sky-500 hover:bg-sky-700 text-sm font-semibold rounded-md">Update</button>
+                                                            <button type="submit" className="md:mt-0 mt-3 px-6 py-3 mr-1 text-white bg-sky-500 hover:bg-sky-700 text-sm font-semibold rounded-md">Update</button>
                                                             <button type="button" onClick={closeModal} className="px-6 py-3 text-white bg-sky-500 hover:bg-sky-700 text-sm font-semibold rounded-md">Close</button>
 
                                                         </form>

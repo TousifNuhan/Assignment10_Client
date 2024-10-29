@@ -83,8 +83,8 @@ const Root = () => {
                             </ul>
                         </div>
                         <div className="flex items-center justify-center ml-3">
-                            <img className="h-8 w-8 mr-2" src="https://tejal.wpengine.com/wp-content/uploads/2019/01/title-icon-img.png" alt="" />
-                            <a className=" text-3xl font-bold">TravelGenie</a>
+                            <img className="h-6 w-6 md:h-8 md:w-8 mr-2" src="https://tejal.wpengine.com/wp-content/uploads/2019/01/title-icon-img.png" alt="" />
+                            <a className="text-xl font-bold md:text-2xl lg:text-3xl ">TravelGenie</a>
                         </div>
                     </div>
                     <div className="navbar-center hidden lg:flex">
@@ -101,7 +101,7 @@ const Root = () => {
 
                             {/* sun icon */}
                             <svg
-                                className="swap-off h-10 w-10 fill-current"
+                                className="swap-off h-8 w-8 md:h-10 md:w-10 fill-current"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24">
                                 <path
@@ -110,7 +110,7 @@ const Root = () => {
 
                             {/* moon icon */}
                             <svg
-                                className="swap-on h-10 w-10 fill-current"
+                                className="swap-on h-8 w-8 md:h-10 md:w-10 fill-current"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24">
                                 <path
@@ -118,7 +118,7 @@ const Root = () => {
                             </svg>
                         </label>
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar mr-3">
-                            <div className="w-10 rounded-full">
+                            <div className="w-8 md:w-10 rounded-full">
                                 {
                                     user ? <div>
                                         <a id="my-anchor-element">
