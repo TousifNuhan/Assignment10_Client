@@ -19,7 +19,7 @@ import AuthProvider from './components/AuthProvider/AuthProvider';
 import PrivateRoute from './components/Route/PrivateRoute';
 
 const spotLoader = async ({ params }) => {
-  const res = await fetch('http://localhost:5000/spot')
+  const res = await fetch('https://assignment10-eight.vercel.app/spot')
   const data = await res.json()
   const spot = data.find(e => e._id === params.id)
 
@@ -30,13 +30,13 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    loader:()=>fetch('http://localhost:5000/user'),
+    loader:()=>fetch('https://assignment10-eight.vercel.app/user'),
     errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch('http://localhost:5000/spot')
+        loader: () => fetch('https://assignment10-eight.vercel.app/spot')
       },
       {
         path: "/login",
@@ -53,23 +53,23 @@ const router = createBrowserRouter([
       {
         path: "/touristSpot",
         element: <TouristSpot></TouristSpot>,
-        loader: () => fetch('http://localhost:5000/spot')
+        loader: () => fetch('https://assignment10-eight.vercel.app/spot')
       },
       {
         path: "/allTouristSpot",
         element: <AllTouristSpot></AllTouristSpot>,
-        loader: () => fetch('http://localhost:5000/spot')
+        loader: () => fetch('https://assignment10-eight.vercel.app/spot')
       },
       {
         path: "/myList",
         element: <MyList></MyList>,
-        loader:()=>fetch('http://localhost:5000/user'),
+        loader:()=>fetch('https://assignment10-eight.vercel.app/user'),
         
       },
       {
         path:"/myList/:id",
         element:<MyList></MyList>,
-        loader:({params})=>fetch(`http://localhost:5000/user/${params.id}`)
+        loader:({params})=>fetch(`https://assignment10-eight.vercel.app/user/${params.id}`)
       },
       {
         path: "/details/:id",

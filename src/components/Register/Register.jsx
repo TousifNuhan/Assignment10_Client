@@ -109,7 +109,7 @@ const Register = () => {
                     })
 
                 const user = { name, email, PhotoURL }
-                fetch('http://localhost:5000/user', {
+                fetch('https://assignment10-eight.vercel.app/user', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -135,7 +135,7 @@ const Register = () => {
                 console.log(result.user)
                 const email = result.user.email
                 const user = { email }
-                fetch('http://localhost:5000/user', {
+                fetch('https://assignment10-eight.vercel.app/user', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -158,7 +158,7 @@ const Register = () => {
                 console.log(result.user)
                 // const email=result.user.email 
                 // const user={email}
-                // fetch('http://localhost:5000/user',{
+                // fetch('https://assignment10-eight.vercel.app/user',{
                 //     method:'POST',
                 //     headers:{
                 //         'content-type':'application/json'

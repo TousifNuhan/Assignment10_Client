@@ -20,11 +20,15 @@ const AddTouristSpot = () => {
         const description = form.description.value;
 
         const newSpot = { userName, email, countryName, spotName, location, photoURL, averageCost, seasonality, travelTime, totalVisitors, description }
+
+        // const token = localStorage.getItem('token'); 
         
-        fetch('http://localhost:5000/spot',{
+        fetch('https://assignment10-eight.vercel.app/spot',{
             method:'POST',
              headers:{
-                'content-type':'application/json'
+                'content-type':'application/json',
+                // 'Authorization': `Bearer ${token}`
+                
              },
              body:JSON.stringify(newSpot)
         })

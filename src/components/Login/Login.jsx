@@ -96,7 +96,7 @@ const Login = () => {
                 const email = result.user.email
                 const user = { email }
 
-                fetch('http://localhost:5000/user',
+                fetch('https://assignment10-eight.vercel.app/user',
                     {
                         method: 'POST',
                         headers: {
@@ -140,7 +140,7 @@ const Login = () => {
                 });
                 // const email=result.user.email 
                 // const user={email}
-                // fetch('http://localhost:5000/user',{
+                // fetch('https://assignment10-eight.vercel.app/user',{
                 //     method:'POST',
                 //     headers:{
                 //         'content-type':'application/json'

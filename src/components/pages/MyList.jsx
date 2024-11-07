@@ -43,7 +43,7 @@ const MyList = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:5000/user/${id}`, {
+                fetch(`https://assignment10-eight.vercel.app/user/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -88,7 +88,7 @@ const MyList = () => {
 
         const updatedSpot = { userName, email, countryName, spotName, location, photoURL, averageCost, seasonality, travelTime, totalVisitors, description }
 
-        fetch(`http://localhost:5000/user/${selectedSpot._id}`, {
+        fetch(`https://assignment10-eight.vercel.app/user/${selectedSpot._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
