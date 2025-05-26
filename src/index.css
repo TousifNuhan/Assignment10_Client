@@ -6,30 +6,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (min-width: 640px) {
-    #map {
-        height: 20rem; 
-        width: 80%;  
-        margin: auto;
-    }
-}
 
-
-@media (min-width: 768px) and (max-width: 1023px) {
-    #map {
-        height: 40rem; 
-        width: 80%;  
-        margin: auto;
-    }
-}
-
-
-@media (min-width: 1024px) {
-    #map {
-        height: 40rem; 
-        
-    }
-}
 
 
 
@@ -46,3 +23,25 @@
     height: 100%;
     transition: background-color 0.25s ease-in-out;
 }
+
+/* @media print {
+    body * {
+      visibility: hidden;
+    }
+  
+    .printable-area, .printable-area * {
+      visibility: visible;
+    }
+  
+    .printable-area {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  
+    .no-print {
+      display: none !important;
+    }
+  }
+   */

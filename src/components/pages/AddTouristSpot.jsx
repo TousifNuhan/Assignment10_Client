@@ -22,35 +22,37 @@ const AddTouristSpot = () => {
         const newSpot = { userName, email, countryName, spotName, location, photoURL, averageCost, seasonality, travelTime, totalVisitors, description }
 
         // const token = localStorage.getItem('token'); 
-        
-        fetch('https://assignment10-eight.vercel.app/spot',{
-            method:'POST',
-             headers:{
-                'content-type':'application/json',
+
+      
+
+        fetch('http://localhost:5000/spot', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
                 // 'Authorization': `Bearer ${token}`
-                
-             },
-             body:JSON.stringify(newSpot)
+
+            },
+            body: JSON.stringify(newSpot)
         })
-        .then(req=>req.json())
-        .then(data=>{
-            console.log(data)
-            if(data.insertedId){
-                Swal.fire({
-                    title: 'Congratulations',
-                    text: 'You have successfully added a spot',
-                    icon: 'success',
-                    confirmButtonText: 'Ok'
-                  })
-            }
-            else{
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Error!!!Spot hasn't been added yet",                   
-                  });
-            }
-        })
+            .then(req => req.json())
+            .then(data => {
+                console.log(data)
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Congratulations',
+                        text: 'You have successfully added a spot',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                }
+                else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Error!!!Spot hasn't been added yet",
+                    });
+                }
+            })
     }
 
     return (
@@ -173,7 +175,7 @@ const AddTouristSpot = () => {
                                 type="time"
                                 placeholder="Enter Travel Time"
                                 name="travelTime"
-                                className="border py-3 px-3 rounded-md focus:outline-none focus:border-[#ff1ecc] w-full max-w-xl" />
+                                className="border py-3 px-3 rounded-md focus:outline-none focus:border-[#ff1ecc] w-full max-w-xl"/>
                         </div>
                         <div className="flex-1">
                             <label className="label">

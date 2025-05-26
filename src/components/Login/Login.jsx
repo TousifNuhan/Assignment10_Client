@@ -96,7 +96,7 @@ const Login = () => {
                 const email = result.user.email
                 const user = { email }
 
-                fetch('https://assignment10-eight.vercel.app/user',
+                fetch('http://localhost:5000/user',
                     {
                         method: 'POST',
                         headers: {
@@ -140,7 +140,7 @@ const Login = () => {
                 });
                 // const email=result.user.email 
                 // const user={email}
-                // fetch('https://assignment10-eight.vercel.app/user',{
+                // fetch('http://localhost:5000/user',{
                 //     method:'POST',
                 //     headers:{
                 //         'content-type':'application/json'
@@ -210,6 +210,7 @@ const Login = () => {
                     <h4 className="md:text-3xl lg:text-5xl leading-tight text-black">Join the largest Tourism Management System in the world!</h4>
                 </div>
             </div>
+            
         </div>
     );
 };

@@ -6,10 +6,10 @@ export default defineConfig({
   plugins: [react()],
   // server: {
   //   proxy: {
-  //     'https://assignment10-eight.vercel.app': {
-  //       target: 'https://assignment10-eight.vercel.app',
+  //     'http://localhost:5000': {
+  //       target: 'http://localhost:5000',
   //       changeOrigin: true,
-  //       rewrite: (path) => path.replace(/^\https://assignment10-eight.vercel.app/, '')
+  //       rewrite: (path) => path.replace(/^\http://localhost:5000/, '')
   //     }
   //   }
   // }

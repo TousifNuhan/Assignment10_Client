@@ -2,10 +2,12 @@ import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import './index.css'
+import { Link } from "lucide-react";
 
 const Location = () => {
     return (
-        <div className="md:w-11/12 mx-auto md:flex justify-center -z-10">
+        <div className="md:w-11/12 mx-auto md:flex md:justify-center -z-10">
             {/* details */}
             <div className="w-4/5 md:w-11/12 flex-1 px-3 py-8 mt-20 mx-auto">
                 <div className="">
@@ -18,11 +20,11 @@ const Location = () => {
                 </div>
                 <div className="md:flex justify-evenly lg:w-4/5 md:mx-auto lg:ml-32 ">
                     <div className="text-[#777777] text-base ">
-                        <p >Road-13, Sector-7, Uttara</p>
+                        <p>Road-13, Sector-7, Uttara</p>
                         <p className="my-1">Dhaka North, 1230</p>
                         <p>Bangladesh</p>
                         <div className="md:mt-8 md:my-0 my-6">
-                            <button className="btn">Get Direction</button>
+                        <a href="https://maps.app.goo.gl/eSkdQmFZ7JG8ZHST6"><button className="btn">Get Direction</button></a>
                         </div>
                     </div>
                     <div className="text-base md:ml-2 lg:ml-0">
@@ -30,13 +32,13 @@ const Location = () => {
                             <MdEmail className="h-4 w-5" />
                             <p className="ml-2 text-[#b8a680]">admin@gmail.com</p>
                         </div>
-                        <div className="flex items-center my-1">
+                        <div className="flex items-center my-2 md:my-1">
                             <FaPhoneAlt className="h-4 w-5" />
-                            <p className="ml-2 text-[#777777]">01306001646</p>
+                            <p className="ml-2 text-[#777777]">+880 1306001646</p>
                         </div>
                         <div className="flex  items-center">
                             <img className="h-4 w-5 " src="/src/assets/telephone.png" alt="" />
-                            <p className="ml-2 text-[#777777] ">48548954-454</p>
+                            <p className="ml-2 text-[#777777] ">+485 48954-454</p>
                         </div>
                     </div>
                 </div>
@@ -44,15 +46,15 @@ const Location = () => {
             </div>
 
             {/* Map */}
-            <div className="flex-1 mt-20 md:relative z-10">
-                <MapContainer center={[23.7506, 90.3682]} zoom={13} scrollWheelZoom={false} id='map'  >
+            <div className="flex-1 mt-8 md:mt-20  md:relative z-10">
+                <MapContainer center={[23.8713, 90.3972]} zoom={13} scrollWheelZoom={true} id='map' className=" h-96 w-96 mx-auto mb-4" >
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <Marker position={[23.7506, 90.3682]}>
+                    <Marker position={[23.8713, 90.3972]}>
                         <Popup>
-                            <h1 className='text-red-800 text-xl md:text-5xl'>EmerGent</h1>
+                            <h1 className='text-red-800 text-xl md:text-5xl'>TravelGenie</h1>
                         </Popup>
 
                     </Marker>

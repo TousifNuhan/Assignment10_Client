@@ -1,4 +1,4 @@
-import { Outlet, useLoaderData } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
@@ -14,6 +14,7 @@ const Root = () => {
     const { user, logout } = useContext(AuthContext)
     // const loader =useLoaderData()
     console.log(user)
+    
 
     const handleSignOut = () => {
         logout()
@@ -139,7 +140,6 @@ const Root = () => {
                                             />
                                         </div>
                                 }
-
 
                             </div>
                         </div>

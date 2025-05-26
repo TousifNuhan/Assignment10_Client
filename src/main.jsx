@@ -17,9 +17,15 @@ import Details from './components/pages/Details';
 import TouristSpot from './components/pages/TouristSpot';
 import AuthProvider from './components/AuthProvider/AuthProvider';
 import PrivateRoute from './components/Route/PrivateRoute';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query' ;
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import Payment from './components/Payment/Payment';
+import Invoice from './components/Invoice/Invoice';
+
+const queryClient=new QueryClient()
 
 const spotLoader = async ({ params }) => {
-  const res = await fetch('https://assignment10-eight.vercel.app/spot')
+  const res = await fetch('http://localhost:5000/spot')
   const data = await res.json()
   const spot = data.find(e => e._id === params.id)
 
@@ -27,16 +33,21 @@ const spotLoader = async ({ params }) => {
 }
 
 const router = createBrowserRouter([
+ {
+        path:"/invoice",
+        element:<Invoice></Invoice>,
+        // loader:spotLoader
+      },
   {
     path: "/",
     element: <Root />,
-    loader:()=>fetch('https://assignment10-eight.vercel.app/user'),
+    loader: () => fetch('http://localhost:5000/user'),
     errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch('https://assignment10-eight.vercel.app/spot')
+        loader: () => fetch('http://localhost:5000/spot')
       },
       {
         path: "/login",
@@ -53,29 +64,36 @@ const router = createBrowserRouter([
       {
         path: "/touristSpot",
         element: <TouristSpot></TouristSpot>,
-        loader: () => fetch('https://assignment10-eight.vercel.app/spot')
+        loader: () => fetch('http://localhost:5000/spot')
       },
       {
         path: "/allTouristSpot",
         element: <AllTouristSpot></AllTouristSpot>,
-        loader: () => fetch('https://assignment10-eight.vercel.app/spot')
+        loader: () => fetch('http://localhost:5000/spot')
       },
       {
         path: "/myList",
         element: <MyList></MyList>,
-        loader:()=>fetch('https://assignment10-eight.vercel.app/user'),
-        
+        // loader: () => fetch(`http://localhost:5000/user?email`),
+
       },
       {
-        path:"/myList/:id",
-        element:<MyList></MyList>,
-        loader:({params})=>fetch(`https://assignment10-eight.vercel.app/user/${params.id}`)
+        path: "/myList/:id",
+        element: <MyList></MyList>,
+        // loader:({params})=>fetch(`http://localhost:5000/user/${params.id}` , {credentials:"include"} )
+
       },
       {
         path: "/details/:id",
         element: <PrivateRoute><Details></Details></PrivateRoute>,
         loader: spotLoader
-      }
+      },
+      {
+        path:"details/:id/payment",
+        element:<Payment></Payment>,
+        loader: spotLoader
+      },
+     
 
     ],
   },
@@ -84,7 +102,10 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </AuthProvider>
   </React.StrictMode>,
 )

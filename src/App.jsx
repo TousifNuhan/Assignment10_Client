@@ -14,6 +14,8 @@ import spain from "../src/assets/spain.jpg";
 import italy from "../src/assets/Italy.jpg";
 import swz from "../src/assets/switzerland.jpg";
 
+import ireland from "../src/assets/boy.png"
+
 
 function App() {
 

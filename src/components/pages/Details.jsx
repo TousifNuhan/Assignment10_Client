@@ -4,13 +4,14 @@ import { FaCalendarAlt, FaDollarSign } from "react-icons/fa";
 import { WiDayCloudyWindy } from "react-icons/wi";
 
 import { FaLocationArrow } from "react-icons/fa6";
-import { useLoaderData} from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { IoArrowForward } from "react-icons/io5";
 
 const Details = () => {
 
     const detail = useLoaderData()
 
-    const { countryName, spotName, averageCost, description , location, photoURL, seasonality, totalVisitors, travelTime } = detail
+    const { _id, countryName, spotName, averageCost, description, location, photoURL, seasonality, totalVisitors, travelTime } = detail
 
     console.log(detail)
     return (
@@ -30,10 +31,15 @@ const Details = () => {
                         <FaDollarSign className='text-xl' />
                         <p className='text-2xl md:text-2xl lg:text-3xl font-bold'>{averageCost}</p>
                     </div>
-                   <div className="flex md:flex-none flex-col">
-                   <button className="py-3 px-20 rounded-3xl text-white mx-auto my-8 md:my-10 lg:my-12 text-base font-semibold bg-[#4e8fee] hover:bg-[#2c6bc9] ">Check Availability</button>
-                   <h4 className="text-base font-semibold text-center md:text-start">Need help with booking? <span className="text-base font-semibold text-[#4e8fee] hover:underline hover:cursor-pointer">Send Us A Message</span></h4>
-                   </div>
+                    <div className="flex md:flex-none flex-col">
+                            <Link to={`/details/${_id}/payment`}>
+                        <button className="flex items-center py-3 px-20 rounded-3xl text-white mx-auto my-8 md:my-10 lg:my-12 text-base font-semibold bg-[#4e8fee] hover:bg-[#2c6bc9]">
+                                <p className="mr-2">Proceed to Checkout </p>
+                            <IoArrowForward />
+                        </button>
+                            </Link>
+                        <h4 className="text-base font-semibold text-center md:text-start">Need help with booking? <span className="text-base font-semibold text-[#4e8fee] hover:underline hover:cursor-pointer">Send Us A Message</span></h4>
+                    </div>
                 </div>
             </div>
 

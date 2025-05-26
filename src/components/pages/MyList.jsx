@@ -1,16 +1,158 @@
-import { useContext, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import Swal from 'sweetalert2'
+import axios from "axios";
+import UseAuth from "../../hooks/UseAuth";
+import UseAxiosSecure from "../../hooks/UseAxiosSecure";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { data } from "autoprefixer";
 
 
 const MyList = () => {
+    const { user } = UseAuth()
+    const axiosSecure = UseAxiosSecure()
+    const queryClient = useQueryClient()
+    // const { user } = useContext(AuthContext)
+    // const [users, setUsers] = useState([])
 
-    const loadedUsers = useLoaderData()
-    const [users, setUsers] = useState(loadedUsers)
-    console.log(loadedUsers)
+    const { data: users = [], isLoading, isError, error, refetch } = useQuery({
+        queryFn: () =>
+            axiosSecure(`/user?email=${user?.email}`)
+                .then(res => {
+                    return res.data
+                })
+        ,
+        queryKey: ['users', user?.email]
+    })
 
-    const { user } = useContext(AuthContext)
+    const { mutate } = useMutation({
+        mutationFn: async ({ id }) => {
+            await Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    fetch(`http://localhost:5000/user/${id}`, {
+                        method: 'DELETE'
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                            const getTouristSpots = users.map((user) => ({
+                                ...user,
+                                touristSpots: user.touristSpots.filter(e => e._id !== id),
+
+                            }))
+
+                            // setUsers(getTouristSpots)
+
+                            // getData()
+                        })
+
+
+
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "The spot has been deleted.",
+                        icon: "success"
+                    });
+                }
+
+            });
+        },
+        onSuccess: () => {
+            // refetch()
+            queryClient.invalidateQueries({ queryKey: ['users'] })
+        }
+    })
+
+    const { mutateAsync } = useMutation({
+        mutationFn: async (updatedSpot) => {
+            await fetch(`http://localhost:5000/user/${selectedSpot._id}`, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(updatedSpot)
+            })
+                .then(res => res.json())
+                .then(data => {
+
+                    console.log(data)
+
+                    const updateUsers = users.map(user => ({
+                        ...user,
+                        touristSpots: user.touristSpots.map(spot =>
+                            spot._id === selectedSpot._id ? { ...spot, ...updatedSpot } : spot
+                        )
+                    }))
+
+
+                    Swal.fire({
+                        text: 'You have successfully updated the spot',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+
+                    return data
+                })
+        },
+        onSuccess: () => {
+            refetch()
+        }
+    })
+
+    // const { data: users = [], isLoading, isError, refetch } = useQuery({
+    //     queryFn: () =>
+    //         axiosSecure(`/user?email=${user?.email}`)
+    //             .then(res => {
+    //                 console.log(res.data)
+    //                 return res.data
+    //             })
+    //     ,
+    //     queryKey: ['users']
+    // })
+    // console.log(users)
+
+    // const { mutate } = useMutation({
+    //     mutationFn: ({ id, updatedSpot }) => {
+    //         console.log(id)
+    //         axiosSecure.put(`/user/${id}`, { updatedSpot })
+    //             .then(res => console.log(res.data))
+    //     },
+    //     onSuccess: ()=>{
+    //         console.log('upated')
+    //         refetch()
+    //     }
+
+    // })
+
+    // const getData = async () => {
+    //     const { data } = await axiosSecure(`/user?email=${user?.email}`)
+
+    //     return data
+    // }
+    // const getData = () =>
+    //     axiosSecure(`/user?email=${user?.email}`)
+    //         .then(res => {
+    //             console.log(res.data)
+    //             return res.data
+    //         })
+
+    // useEffect(() => {
+    //     // axios(`http://localhost:5000/user?email=${user?.email}`, { withCredentials: true })
+    //     axiosSecure(`/user?email=${user?.email}`)
+    //         .then(res => {
+    //             console.log(res.data)
+    //             setUsers(res.data)
+    //         })
+    // }, [user, axiosSecure])
 
     const userEmail = user?.email
 
@@ -32,39 +174,46 @@ const MyList = () => {
 
     const handleDelete = id => {
 
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
+        mutate({ id })
 
-                fetch(`https://assignment10-eight.vercel.app/user/${id}`, {
-                    method: 'DELETE'
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data)
-                        const getTouristSpots = users.map((user) => ({
-                            ...user,
-                            touristSpots: user.touristSpots.filter(e => e._id !== id),
+        // Swal.fire({
+        //     title: "Are you sure?",
+        //     text: "You won't be able to revert this!",
+        //     icon: "warning",
+        //     showCancelButton: true,
+        //     confirmButtonColor: "#3085d6",
+        //     cancelButtonColor: "#d33",
+        //     confirmButtonText: "Yes, delete it!"
+        // }).then((result) => {
+        //     if (result.isConfirmed) {
 
-                        }))
+        //         fetch(`http://localhost:5000/user/${id}`, {
+        //             method: 'DELETE'
+        //         })
+        //             .then(res => res.json())
+        //             .then(data => {
+        //                 console.log(data)
+        //                 const getTouristSpots = users.map((user) => ({
+        //                     ...user,
+        //                     touristSpots: user.touristSpots.filter(e => e._id !== id),
 
-                        setUsers(getTouristSpots)
-                    })
+        //                 }))
 
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "The spot has been deleted.",
-                    icon: "success"
-                });
-            }
-        });
+        //                 // setUsers(getTouristSpots)
+
+        //                 // getData()
+        //             })
+
+
+
+        //         Swal.fire({
+        //             title: "Deleted!",
+        //             text: "The spot has been deleted.",
+        //             icon: "success"
+        //         });
+        //     }
+
+        // });
 
     }
 
@@ -88,33 +237,44 @@ const MyList = () => {
 
         const updatedSpot = { userName, email, countryName, spotName, location, photoURL, averageCost, seasonality, travelTime, totalVisitors, description }
 
-        fetch(`https://assignment10-eight.vercel.app/user/${selectedSpot._id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(updatedSpot)
-        })
-            .then(res => res.json())
-            .then(data => {
+        // fetch(`http://localhost:5000/user/${selectedSpot._id}`, {
+        //     method: 'PUT',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(updatedSpot)
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
 
-                console.log(data)
+        //         console.log(data)
 
-                const updateUsers = users.map(user => ({
-                    ...user,
-                    touristSpots: user.touristSpots.map(spot =>
-                        spot._id === selectedSpot._id ? { ...spot, ...updatedSpot } : spot
-                    )
-                }))
-                setUsers(updateUsers)
-                Swal.fire({
-                    text: 'You have successfully updated the spot',
-                    icon: 'success',
-                    confirmButtonText: 'Ok'
-                })
-            })
+        //         const updateUsers = users.map(user => ({
+        //             ...user,
+        //             touristSpots: user.touristSpots.map(spot =>
+        //                 spot._id === selectedSpot._id ? { ...spot, ...updatedSpot } : spot
+        //             )
+        //         }))
+
+
+        //         Swal.fire({
+        //             text: 'You have successfully updated the spot',
+        //             icon: 'success',
+        //             confirmButtonText: 'Ok'
+        //         })
+        //         // getData()
+        //     })
+        // mutate({ id: selectedSpot._id, updatedSpot })
+        mutateAsync(updatedSpot)
 
     }
+
+    if (isLoading) return <span className="loading loading-spinner loading-lg"></span>
+    if (isError || error) {
+        console.log(isError, error)
+    }
+
+
 
     return (
         <div className="text-center">
